@@ -1,0 +1,40 @@
+::-moz-placeholder {
+    color: #000;
+    opacity: 0.5;
+}
+
+button:hover {
+    color: #fff;
+    border-color: #000;
+    background-color: #000;
+}
+
+button {
+    color: #000;
+    background-color: #fff;
+}
+form{
+  margin-top: 1.5%;
+}
+table{
+  width: 95%;
+  margin: 0 auto;
+}
+table thead tr th{
+  text-align: center;
+}
+
+table tbody tr td{
+  text-align: center;
+}
+
+#main form p a{
+  text-decoration: underline;
+}
+
+img{
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  opacity: 0.1;
+}

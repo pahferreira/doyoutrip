@@ -1,0 +1,282 @@
+body, h1, h2, h3, h4, h5{
+  margin: 0;
+  text-align: center;
+}
+
+.fullWebSite{
+  display: grid;
+  grid-template: repeat(4, 100vh) / 1fr;
+}
+
+.overlay{
+  background-color: rgba(31, 31, 31, 0.80);
+  width: 100%;
+  height: 100%;
+}
+
+.icons {
+    font-size: 30px;
+}
+/* HEADER */
+
+header{
+  background-image: url("../img/header-img.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+  color: #FFF;
+}
+
+.content-header{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 5%;
+  align-content: center;
+  justify-content: center;
+  grid-template-rows: 100px 100px;
+}
+
+.content-header > h1{
+  font-size: 5rem;
+}
+
+/* ABOUT */
+
+.about{
+  color: #212529;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  grid-template: 170px auto / repeat(2, 1fr);
+  grid-template-areas:
+    "h h"
+    "i c";
+}
+
+.about-header{
+  grid-area: h;
+}
+
+.about-img{
+  grid-area: i;
+  padding: 3%;
+}
+
+.about-content{
+  grid-area: c;
+  margin-right: 3%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+
+.about ul.about-icons {
+    padding-left: 0;
+    list-style: none;
+}
+
+.about .about-icons li {
+    display: inline;
+    margin: 20px;
+}
+
+/* SERVICES */
+
+.services{
+  background-color: #f5f5f5;
+  color: #212529;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  grid-template: 100px 500px / repeat(3, 1fr);
+  grid-gap: 100px 10px;
+}
+
+.services-header{
+  grid-column: 1 / -1;
+}
+
+.services-flights{
+  grid-row: 2 / -1;
+  background-image: url("../img/service-flight.jpg");
+}
+
+.services-cars{
+  grid-row: 2 / -1;
+  background-image: url("../img/service-car.jpg");
+}
+
+.services-hotels{
+  grid-row: 2 / -1;
+  background-image: url("../img/service-hotel.jpg");
+}
+
+.services-item {
+    margin: 2% 3%;
+    filter: grayscale(100%);
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    display: grid;
+    align-items: center;
+}
+
+.services-item:hover {
+    filter: grayscale(0%);
+}
+
+.link-btn button {
+    color: #fff;
+    border-color: #fff;
+}
+
+.link-btn button:hover {
+    background-color: #fff;
+    color: #000;
+}
+.link-btn a:hover, .link-btn a {
+    text-decoration: none;
+}
+
+/* PLANNER */
+
+.planner{
+  color: #FFF;
+  background-image: url("../img/planner-img.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+.planner button {
+    color: #fff;
+    border-color: #fff;
+}
+
+.planner button:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+.planner-content{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.planner-header{
+  grid-column: 1 / -1;
+}
+
+.planner-text{
+  font-size: 1.1em;
+}
+
+@media (max-width: 1024px) {
+  .content-header > h1 {
+    font-size: 4rem;
+  }
+  .services-item{
+    margin: 10% 4%;
+  }
+  .planner-content{
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  html{
+    font-size: 16px;
+  }
+  .icons{
+    font-size: 23px;
+  }
+  .services-item{
+    margin: 20% 4%;
+  }
+}
+
+@media (max-width: 768px){
+  .about{
+    grid-template: 100px auto auto / repeat(2, 1fr);
+    grid-template-areas: "h h" "i i" "c c";
+  }
+
+  .about-img{
+    padding: 6%;
+  }
+
+  .about-content{
+    padding: 2%;
+  }
+
+  html{
+    font-size: 17px;
+  }
+  .content-header > h1{
+    font-size: 3.5rem;
+  }
+  .services{
+    grid-template: 0px 500px / repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px){
+  .services{
+    grid-template: 106px repeat(3, 1fr) / repeat(3, 1fr);
+    grid-gap: 0px 0px;
+  }
+
+  .services-item{
+    margin: 6% 5%;
+  }
+
+  .services-flights{
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .services-cars{
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .services-hotels{
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+}
+
+@media (max-width: 414px){
+  .content-header > h1{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 414px){
+  .content-header > h1{
+    font-size: 2rem;
+  }
+  .about{
+    grid-template: 39px auto auto / repeat(2, 1fr);
+
+  }
+  html{
+    font-size: 13px;
+  }
+  .icons{
+    font-size: 16px;
+  }
+  .about-img{
+    padding: 16%;
+  }
+
+  .services{
+    grid-template: 70px repeat(3, 1fr) / repeat(3, 1fr);
+  }
+}
