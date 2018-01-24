@@ -18,12 +18,13 @@ button.addEventListener("click", event => {
 
 
 function loadCars(location, pickUp, dropOff) {
-    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=UHXCte2m91iBbBSRUXYnGQZkJVH4gM43"
+    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?"
+    const API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
     const LOCATION = location.toUpperCase()
     const PICK_UP = pickUp.split("/").reverse().join("-")
     const DROP_OFF = dropOff.split("/").reverse().join("-")
     const CONST_URL = "currency=USD"
-    const FETCH_URL = `${BASE_URL}&location=${LOCATION}&pick_up=${PICK_UP}&drop_off=${DROP_OFF}&${CONST_URL}`
+    const FETCH_URL = `${BASE_URL}apikey=${API_KEY}&location=${LOCATION}&pick_up=${PICK_UP}&drop_off=${DROP_OFF}&${CONST_URL}`
     console.log(FETCH_URL)
 
     fetch(FETCH_URL).then(response => response.json()).then(json => {

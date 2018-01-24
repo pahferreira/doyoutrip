@@ -20,13 +20,14 @@ button.addEventListener("click", event => {
 })
 
 function loadFlights(origin, destination, departureDate, duration) {
-    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?apikey=UHXCte2m91iBbBSRUXYnGQZkJVH4gM43"
+    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?"
+    const API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
     const CONST_PART = "&currency=USD&direct=true"
     const ORIGIN = origin.toUpperCase()
     const DESTINATION = destination.toUpperCase()
     const DEPARTURE_DATE = departureDate
     const DURATION = duration
-    const FETCH_URL = `${BASE_URL}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
+    const FETCH_URL = `${BASE_URL}apikey=${API_KEY}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
 
     fetch(FETCH_URL).then(response => response.json()).then(json => {
         flights = json.results

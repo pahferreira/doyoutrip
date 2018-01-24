@@ -18,12 +18,13 @@ button.addEventListener("click", event => {
 })
 
 function loadHotels(location, checkIn, checkOut) {
-    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=UHXCte2m91iBbBSRUXYnGQZkJVH4gM43"
+    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?"
+    const API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
     const CONST_PART = "radius=50&lang=EN&currency=USD"
     const LOCATION = location.toUpperCase()
     const CHECK_IN = checkIn
     const CHECK_OUT = checkOut
-    const FETCH_URL = `${BASE_URL}&location=${LOCATION}&check_in=${CHECK_IN}&check_out=${CHECK_OUT}&${CONST_PART}`
+    const FETCH_URL = `${BASE_URL}apikey=${API_KEY}&location=${LOCATION}&check_in=${CHECK_IN}&check_out=${CHECK_OUT}&${CONST_PART}`
 
     fetch(FETCH_URL).then(response => response.json()).then(json => {
         hotels = json.results
