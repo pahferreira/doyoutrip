@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <!-- PAPPER CSS     -->
     <link rel="stylesheet" href="../css/paper.css">
     <!-- GENERAL CSS -->
@@ -14,27 +12,28 @@
     <link rel="stylesheet" href="../css/api-pages.css">
     <title>Flights</title>
 </head>
-<body>
-  <main id="main">
-      <form action="">
-          <label>Origin: <input type="text" placeholder="Ex: NYC" id="origin-flight"></label>
-          <label>Destiny: <input type="text" placeholder="Ex: BOS" id="destination-flight"></label>
-          <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here.</a></p>
-          <label>Departure Date: <input type="text" placeholder="dd/mm/yyyy" id="departure-date-flight"></label>
-          <label>Duration: <input type="text" placeholder="1--15" id="duration-flight"></label><br>
-          <button class="btn-small" type="click" id="find-flights">Fly high!</button>
-          <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
 
-      </form>
-      <table style="margin-top: 3%">
-          <thead id="thead-flights">
-          </thead>
-          <tbody id="tbody-flights">
-          </tbody>
-      </table>
-      <img src="../img/hotels-img.jpg" alt="">
-  </main>
-  <script src="../js/flights.js"></script>
+<body>
+    <main id="main">
+        <form action="">
+            <label>Origin: <input type="text" placeholder="Ex: NYC" id="origin-flight"></label>
+            <label>Destiny: <input type="text" placeholder="Ex: BOS" id="destination-flight"></label>
+            <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here.</a></p>
+            <label>Departure Date: <input type="text" placeholder="dd/mm/yyyy" id="departure-date-flight"></label>
+            <label>Duration: <input type="text" placeholder="1--15" id="duration-flight"></label><br>
+            <button class="btn-small" type="click" id="find-flights">Fly high!</button>
+            <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
+
+        </form>
+        <table style="margin-top: 3%">
+            <thead id="thead-flights">
+            </thead>
+            <tbody id="tbody-flights">
+            </tbody>
+        </table>
+        <img src="../img/hotels-img.jpg" alt="">
+    </main>
+    <script src="../js/flights.js"></script>
 </body>
 
 </html>
