@@ -1,74 +1,83 @@
 const flightsHeaderContainer = document.querySelector("#thead-flights")
 const flightsContainer = document.querySelector("#tbody-flights")
-
-let inputOrigin = document.querySelector("#origin-flight")
-let inputDestination = document.querySelector("#destination-flight")
-let inputDepartureDate = document.querySelector("#departure-date-flight")
-let inputDuration = document.querySelector("#duration-flight")
-
+const formFlights = document.querySelector("form#FormFlightsID")
 const button = document.querySelector("#find-flights")
 
 button.addEventListener("click", event => {
+    const formDataFlight = new FormData(formFlights)
+    const FLIGHTS_INFO = {
+        origin: formDataFlight.get('origin-flight'),
+        destination: formDataFlight.get('destination-flight'),
+        departureDate: formDataFlight.get('departure-date-flight'),
+        duration: formDataFlight.get('duration')
+    }
+    let flights = new Flights(FLIGHTS_INFO)
+    flights.loadFlights()
     event.preventDefault()
-    let origin = inputOrigin.value
-    let destination = inputDestination.value
-    let departureDate = inputDepartureDate.value.split("/").reverse().join("-")
-    let duration = inputDuration.value
-
-    let flights
-    loadFlights(origin, destination, departureDate, duration)
 })
+class Flights {
+    constructor(flightsInfo) {
+        this.flightsInfo = flightsInfo
+        this.BASE_URL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?"
+        this.API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
+    }
 
-function loadFlights(origin, destination, departureDate, duration) {
-    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?"
-    const API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
-    const CONST_PART = "&currency=USD&direct=true"
-    const ORIGIN = origin.toUpperCase()
-    const DESTINATION = destination.toUpperCase()
-    const DEPARTURE_DATE = departureDate
-    const DURATION = duration
-    const FETCH_URL = `${BASE_URL}apikey=${API_KEY}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
+    loadFlights() {
+        const CONST_PART = "&currency=USD&direct=true"
+        const ORIGIN = this.flightsInfo.origin.toUpperCase()
+        const DESTINATION = this.flightsInfo.destination.toUpperCase()
+        const DEPARTURE_DATE = this.flightsInfo.departureDate.split("/").reverse().join("-")
+        const DURATION = this.flightsInfo.duration
+        const FETCH_URL = `${this.BASE_URL}apikey=${this.API_KEY}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
+        fetch(FETCH_URL).then(response => response.json()).then(json => {
+            let flightsData = json.results
+            if (json.results == undefined) {
+                flightsContainer.innerHTML == ""
+                flightsHeaderContainer.innerHTML = this.flightsError()
+            } else {
+                flightsHeaderContainer.innerHTML = this.flightsHeaderHTML()
+                flightsContainer.innerHTML == ""
+                flightsContainer.insertAdjacentHTML('beforeend', this.flightsHTML(flightsData, ORIGIN))
+            }
+        })
+    }
 
-    fetch(FETCH_URL).then(response => response.json()).then(json => {
-        flights = json.results
-        flightsHeaderContainer.innerHTML = flightsHeader()
-        flightsContainer.innerHTML += flightsHTML(flights, ORIGIN)
-    })
-}
-
-function flightsHeader() {
-    return (
-        `<tr>
-            <th>Airline</th>
-            <th>Itinerary</th>
-            <th>Departure Date</th>
-            <th>Return Date</th>
-            <th>Price</th>
-        </tr>`
-    )
-}
-
-function flightsHTML(flights, origin) {
-    const flightsData = flights.map(flight => {
-        return {
-            "airline": flight.airline,
-            "origin": origin,
-            "destination": flight.destination,
-            "departure_date": flight.departure_date.split("-").reverse().join("/"),
-            "return_date": flight.return_date.split("-").reverse().join("/"),
-            "price": flight.price
-        }
-    })
-
-    return flightsData.map(flight => {
+    flightsError() {
+        return `<p>Sorry, there are no flights available</p>`
+    }
+    flightsHeaderHTML() {
         return (
             `<tr>
-                <td>${flight.airline}</td>
-                <td>${flight.origin} - ${flight.destination}</td>
-                <td>${flight.departure_date}</td>
-                <td>${flight.return_date}</td>
-                <td>${flight.price} USD</td>
+                <th>Airline</th>
+                <th>Itinerary</th>
+                <th>Departure Date</th>
+                <th>Return Date</th>
+                <th>Price</th>
             </tr>`
         )
-    }).join('')
+    }
+    flightsHTML(flights, origin) {
+        const flightsData = flights.map(flight => {
+            return {
+                "airline": flight.airline,
+                "origin": origin,
+                "destination": flight.destination,
+                "departure_date": flight.departure_date.split("-").reverse().join("/"),
+                "return_date": flight.return_date.split("-").reverse().join("/"),
+                "price": flight.price
+            }
+        })
+
+        return flightsData.map(flight => {
+            return (
+                `<tr>
+                    <td>${flight.airline}</td>
+                    <td>${flight.origin} - ${flight.destination}</td>
+                    <td>${flight.departure_date}</td>
+                    <td>${flight.return_date}</td>
+                    <td>${flight.price} USD</td>
+                </tr>`
+            )
+        }).join('')
+    }
 }

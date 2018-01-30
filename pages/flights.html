@@ -15,15 +15,14 @@
 
 <body>
     <main id="main">
-        <form action="">
-            <label>Origin: <input type="text" placeholder="Ex: NYC" id="origin-flight"></label>
-            <label>Destiny: <input type="text" placeholder="Ex: BOS" id="destination-flight"></label>
+        <form action="" id="FormFlightsID">
+            <label>Origin: <input type="text" placeholder="Ex: NYC" name="origin-flight"></label>
+            <label>Destiny: <input type="text" placeholder="Ex: BOS" name="destination-flight"></label>
             <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here.</a></p>
-            <label>Departure Date: <input type="text" placeholder="dd/mm/yyyy" id="departure-date-flight"></label>
-            <label>Duration: <input type="text" placeholder="1--15" id="duration-flight"></label><br>
+            <label>Departure Date: <input type="text" placeholder="dd/mm/yyyy" name="departure-date-flight"></label>
+            <label>Duration: <input type="text" placeholder="1--15" name="duration"></label><br>
             <button class="btn-small" type="click" id="find-flights">Fly high!</button>
-            <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
-
+            <a href="../index.html"><button class="btn-small" type="button" id="button">Back Home!</button></a>
         </form>
         <table style="margin-top: 3%">
             <thead id="thead-flights">
