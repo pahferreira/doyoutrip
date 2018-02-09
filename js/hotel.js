@@ -1,71 +1,86 @@
 const hotelsHeaderContainer = document.querySelector("#thead-hotels")
 const hotelsContainer = document.querySelector("#tbody-hotels")
-
-let inputLocationHotel = document.querySelector("#location-hotel")
-let inputCheckInHotel = document.querySelector("#checkin-hotel")
-let inputCheckOutHotel = document.querySelector("#checkout-hotel")
-
+const formHotels = document.querySelector("form#FormHotelsID")
 const button = document.querySelector("#find-hotels")
 
 button.addEventListener("click", event => {
-    event.preventDefault()
-    let locationHotel = inputLocationHotel.value
-    let checkInHotel = inputCheckInHotel.value.split("/").reverse().join("-")
-    let checkOutHotel = inputCheckOutHotel.value.split("/").reverse().join("-")
+    const formDataHotel = new FormData(formHotels)
+    const HOTEL_INFO = {
+        location: formDataHotel.get('location-hotel'),
+        checkin: formDataHotel.get('checkin-hotel'),
+        checkout: formDataHotel.get('checkout-hotel')
+    }
 
-    let hotels
-    loadHotels(locationHotel, checkInHotel, checkOutHotel)
+    let hotels = new Hotels
+    hotels.loadHotels()
+    event.preventDefault()
 })
 
-function loadHotels(location, checkIn, checkOut) {
-    const BASE_URL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?"
-    const API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
-    const CONST_PART = "radius=50&lang=EN&currency=USD"
-    const LOCATION = location.toUpperCase()
-    const CHECK_IN = checkIn
-    const CHECK_OUT = checkOut
-    const FETCH_URL = `${BASE_URL}apikey=${API_KEY}&location=${LOCATION}&check_in=${CHECK_IN}&check_out=${CHECK_OUT}&${CONST_PART}`
+class Hotels {
+    constructor(hotelsInfo) {
+        this.hotelsInfo = hotelsInfo
+        this.BASE_URL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?"
+        this.API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
+    }
 
-    fetch(FETCH_URL).then(response => response.json()).then(json => {
-        hotels = json.results
-        hotelsHeaderContainer.innerHTML = hotelsHeader()
-        hotelsContainer.innerHTML += hotelsHTML(hotels)
-    })
-}
+    loadHotels() {
+        const CONST_PART = "radius=50&lang=EN&currency=USD"
+        const LOCATION = this.hotelsInfo.location.toUpperCase()
+        const CHECK_IN = this.hotelsInfo.checkin.split("/").reverse().join("-")
+        const CHECK_OUT = this.hotelsInfo.checkout.split("/").reverse().join("-")
+        const FETCH_URL = `${this.BASE_URL}apikey=${this.API_KEY}&location=${LOCATION}&check_in=${CHECK_IN}&check_out=${CHECK_OUT}&${CONST_PART}`
 
-function hotelsHeader() {
-    return (
-        `<tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Total</th>
-        </tr>`
-    )
-}
-
-function hotelsHTML(hotels) {
-    const hotelsData = hotels.map(hotel => {
-        return {
-            "name": hotel.property_name,
-            "phone": hotel.contacts[0].detail,
-            "total": hotel.total_price.amount,
-            "address": {
-                "city": hotel.address.city,
-                "country": hotel.address.country,
-                "line": hotel.address.line1,
+        fetch(FETCH_URL).then(response => response.json()).then(json => {
+            if (json.results == undefined) {
+                hotelsContainer.innerHTML == ""
+                hotelsHeaderContainer.innerHTML = this.hotelsError()
+            } else {
+                let hotelsData = json.results
+                hotelsHeaderContainer.innerHTML = this.hotelsHeader()
+                hotelsContainer.innerHTML == ""
+                hotelsContainer.insertAdjacentHTML('beforeend', this.hotelsHTML(hotelsData))
             }
-        }
-    })
+        })
+    }
 
-    return hotelsData.map(hotel => {
+    hotelsError() {
+        return `<p>Sorry, there are no hotels available</p>`
+    }
+
+    hotelsHeader() {
         return (
             `<tr>
-                <td>${hotel.name}</td>
-                <td>${hotel.address.line}. ${hotel.address.city} - ${hotel.address.country}</td>
-                <td>${hotel.phone}</td>
-                <td>${hotel.total} USD</td>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Total</th>
             </tr>`
         )
-    }).join('')
+    }
+
+    hotelsHTML(hotels) {
+        const hotelsData = hotels.map(hotel => {
+            return {
+                "name": hotel.property_name,
+                "phone": hotel.contacts[0].detail,
+                "total": hotel.total_price.amount,
+                "address": {
+                    "city": hotel.address.city,
+                    "country": hotel.address.country,
+                    "line": hotel.address.line1,
+                }
+            }
+        })
+
+        return hotelsData.map(hotel => {
+            return (
+                `<tr>
+                    <td>${hotel.name}</td>
+                    <td>${hotel.address.line}. ${hotel.address.city} - ${hotel.address.country}</td>
+                    <td>${hotel.phone}</td>
+                    <td>${hotel.total} USD</td>
+                </tr>`
+            )
+        }).join('')
+    }
 }

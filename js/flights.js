@@ -30,11 +30,11 @@ class Flights {
         const DURATION = this.flightsInfo.duration
         const FETCH_URL = `${this.BASE_URL}apikey=${this.API_KEY}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
         fetch(FETCH_URL).then(response => response.json()).then(json => {
-            let flightsData = json.results
             if (json.results == undefined) {
                 flightsContainer.innerHTML == ""
                 flightsHeaderContainer.innerHTML = this.flightsError()
             } else {
+                let flightsData = json.results
                 flightsHeaderContainer.innerHTML = this.flightsHeaderHTML()
                 flightsContainer.innerHTML == ""
                 flightsContainer.insertAdjacentHTML('beforeend', this.flightsHTML(flightsData, ORIGIN))

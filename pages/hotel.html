@@ -15,11 +15,11 @@
 
 <body>
     <main id="main">
-        <form action="">
-            <label>Location: <input type="text" placeholder="Ex: NYC" id="location-hotel"></label>
+        <form action="" id="FormHotelsID">
+            <label>Location: <input type="text" placeholder="Ex: NYC" name="location-hotel"></label>
             <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here</a>.</p>
-            <label>Check In: <input type="text" placeholder="dd/mm/yyyy" id="checkin-hotel"></label>
-            <label>Check Out: <input type="text" placeholder="dd/mm/yyyy" id="checkout-hotel"></label><br>
+            <label>Check In: <input type="date" placeholder="dd/mm/yyyy" name="checkin-hotel"></label>
+            <label>Check Out: <input type="date" placeholder="dd/mm/yyyy" name="checkout-hotel"></label><br>
             <button class="btn-small" type="click" id="find-hotels">Find Hotels!</button>
             <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
 
