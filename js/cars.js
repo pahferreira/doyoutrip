@@ -1,20 +1,3 @@
-const carsContainer = document.querySelector("#tbody-cars")
-const carsHeader = document.querySelector("#thead-cars")
-const formCars = document.querySelector("form#FormCarsID")
-let button = document.querySelector("#find-cars")
-
-button.addEventListener("click", event => {
-    const formDataCars = new FormData(formCars)
-    const CARS_INFO = {
-        location: formDataCars.get('location-car'),
-        pickUp: formDataCars.get('pickup-car'),
-        dropOff: formDataCars.get('dropoff-car')
-    }
-
-    let cars = new Cars(CARS_INFO)
-    cars.loadCars()
-})
-
 class Cars {
     constructor(carsInfo) {
         this.carsInfo = carsInfo
@@ -87,3 +70,5 @@ class Cars {
         )
     }
 }
+
+export default class Cars {}

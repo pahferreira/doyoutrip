@@ -1,21 +1,3 @@
-const hotelsHeaderContainer = document.querySelector("#thead-hotels")
-const hotelsContainer = document.querySelector("#tbody-hotels")
-const formHotels = document.querySelector("form#FormHotelsID")
-const button = document.querySelector("#find-hotels")
-
-button.addEventListener("click", event => {
-    const formDataHotel = new FormData(formHotels)
-    const HOTEL_INFO = {
-        location: formDataHotel.get('location-hotel'),
-        checkin: formDataHotel.get('checkin-hotel'),
-        checkout: formDataHotel.get('checkout-hotel')
-    }
-
-    let hotels = new Hotels
-    hotels.loadHotels()
-    event.preventDefault()
-})
-
 class Hotels {
     constructor(hotelsInfo) {
         this.hotelsInfo = hotelsInfo
@@ -84,3 +66,5 @@ class Hotels {
         }).join('')
     }
 }
+
+export default class Hotels {}

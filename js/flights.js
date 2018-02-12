@@ -1,20 +1,3 @@
-const flightsHeaderContainer = document.querySelector("#thead-flights")
-const flightsContainer = document.querySelector("#tbody-flights")
-const formFlights = document.querySelector("form#FormFlightsID")
-const button = document.querySelector("#find-flights")
-
-button.addEventListener("click", event => {
-    const formDataFlight = new FormData(formFlights)
-    const FLIGHTS_INFO = {
-        origin: formDataFlight.get('origin-flight'),
-        destination: formDataFlight.get('destination-flight'),
-        departureDate: formDataFlight.get('departure-date-flight'),
-        duration: formDataFlight.get('duration')
-    }
-    let flights = new Flights(FLIGHTS_INFO)
-    flights.loadFlights()
-    event.preventDefault()
-})
 class Flights {
     constructor(flightsInfo) {
         this.flightsInfo = flightsInfo
@@ -81,3 +64,5 @@ class Flights {
         }).join('')
     }
 }
+
+export default class Flights {}
