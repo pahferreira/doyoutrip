@@ -2,7 +2,7 @@ class Flights {
     constructor(flightsInfo) {
         this.flightsInfo = flightsInfo
         this.BASE_URL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?"
-        this.API_KEY = "4vopySRRuG5KtjGdKoiA32X9VGQx5kiH"
+        this.API_KEY = "R6yLXQyIkl3hof6vGGvMeJwTv8fqAldi"
     }
 
     loadFlights() {
