@@ -13,13 +13,11 @@ class Flights {
         const DURATION = this.flightsInfo.duration
         const FETCH_URL = `${this.BASE_URL}apikey=${this.API_KEY}&origin=${ORIGIN}&destination=${DESTINATION}&departure_date=${DEPARTURE_DATE}&duration=${DURATION}&${CONST_PART}`
         fetch(FETCH_URL).then(response => response.json()).then(json => {
-            if (json.results == undefined) {
-                flightsContainer.innerHTML == ""
+            if (json.results == undefined || json.results.length == 0) {
                 flightsHeaderContainer.innerHTML = this.flightsError()
             } else {
                 let flightsData = json.results
                 flightsHeaderContainer.innerHTML = this.flightsHeaderHTML()
-                flightsContainer.innerHTML == ""
                 flightsContainer.insertAdjacentHTML('beforeend', this.flightsHTML(flightsData, ORIGIN))
             }
         })
@@ -65,4 +63,22 @@ class Flights {
     }
 }
 
-export default class Flights {}
+const flightsHeaderContainer = document.querySelector("#thead-flights")
+const flightsContainer = document.querySelector("#tbody-flights")
+const formFlights = document.querySelector("form#FormFlightsID")
+const buttonFlight = document.querySelector("#find-flights")
+
+buttonFlight.addEventListener("click", event => {
+    const formDataFlight = new FormData(formFlights)
+    const FLIGHTS_INFO = {
+        origin: formDataFlight.get('origin-flight'),
+        destination: formDataFlight.get('destination-flight'),
+        departureDate: formDataFlight.get('departure-date-flight'),
+        duration: formDataFlight.get('duration')
+    }
+    flightsHeaderContainer.innerHTML = ""
+    flightsContainer.innerHTML = ""
+    let flights = new Flights(FLIGHTS_INFO)
+    flights.loadFlights()
+    event.preventDefault()
+})

@@ -12,14 +12,13 @@ class Hotels {
         const CHECK_OUT = this.hotelsInfo.checkout.split("/").reverse().join("-")
         const FETCH_URL = `${this.BASE_URL}apikey=${this.API_KEY}&location=${LOCATION}&check_in=${CHECK_IN}&check_out=${CHECK_OUT}&${CONST_PART}`
 
+
         fetch(FETCH_URL).then(response => response.json()).then(json => {
-            if (json.results == undefined) {
-                hotelsContainer.innerHTML == ""
+            if (json.results == undefined || json.results.length == 0) {
                 hotelsHeaderContainer.innerHTML = this.hotelsError()
             } else {
                 let hotelsData = json.results
                 hotelsHeaderContainer.innerHTML = this.hotelsHeader()
-                hotelsContainer.innerHTML == ""
                 hotelsContainer.insertAdjacentHTML('beforeend', this.hotelsHTML(hotelsData))
             }
         })
@@ -67,4 +66,21 @@ class Hotels {
     }
 }
 
-export default class Hotels {}
+const hotelsHeaderContainer = document.querySelector("#thead-hotels")
+const hotelsContainer = document.querySelector("#tbody-hotels")
+const formHotels = document.querySelector("form#FormHotelsID")
+const buttonHotel = document.querySelector("#find-hotels")
+
+buttonHotel.addEventListener("click", event => {
+    const formDataHotel = new FormData(formHotels)
+    const HOTEL_INFO = {
+        location: formDataHotel.get('location-hotel'),
+        checkin: formDataHotel.get('checkin-hotel'),
+        checkout: formDataHotel.get('checkout-hotel')
+    }
+    hotelsHeaderContainer.innerHTML = ""
+    hotelsContainer.innerHTML = ""
+    let hotels = new Hotels(HOTEL_INFO)
+    hotels.loadHotels()
+    event.preventDefault()
+})
