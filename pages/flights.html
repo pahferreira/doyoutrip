@@ -16,13 +16,32 @@
 <body>
     <main id="main">
         <form action="" id="FormFlightsID">
-            <label>Origin: <input type="text" placeholder="Ex: NYC" name="origin-flight"></label>
-            <label>Destiny: <input type="text" placeholder="Ex: BOS" name="destination-flight"></label>
-            <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here.</a></p>
-            <label>Departure Date: <input type="date" placeholder="dd/mm/yyyy" name="departure-date-flight"></label>
-            <label>Duration: <input type="text" placeholder="1--15" name="duration"></label><br>
-            <button class="btn-small" type="click" id="find-flights">Fly high!</button>
-            <a href="../index.html"><button class="btn-small" type="button" id="button">Back Home!</button></a>
+            <div class="container">
+                <div class="row">
+                    <div class="flex-center input-boxes" <label>Origin: <input type="text" placeholder="Ex: NYC" name="origin-flight"></label>
+                    </div>
+                    <div class="flex-center input-boxes">
+                        <label>Destiny: <input type="text" placeholder="Ex: BOS" name="destination-flight"></label>
+                    </div>
+                    <div class="flex-center input-boxes">
+                        <label>Departure Date: <input type="date" placeholder="dd/mm/yyyy" name="departure-date-flight"></label>
+                    </div>
+                    <div class="flex-center input-boxes">
+                        <label>Duration: <input type="text" placeholder="1--15" name="duration"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col">
+                        <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here.</a></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col">
+                        <button class="btn-small" type="click" id="find-flights">Fly high!</button>
+                        <a href="../index.html"><button class="btn-small" type="button" id="button">Back Home!</button></a>
+                    </div>
+                </div>
+            </div>
         </form>
         <table style="margin-top: 3%">
             <thead id="thead-flights">

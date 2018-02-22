@@ -63,6 +63,8 @@ class Flights {
     }
 }
 
+const YATAvalidation = /^([A-Z]){3}$/gi
+const durationValidation = /^(1[0-5]|0?[1-9])$/g
 const flightsHeaderContainer = document.querySelector("#thead-flights")
 const flightsContainer = document.querySelector("#tbody-flights")
 const formFlights = document.querySelector("form#FormFlightsID")
@@ -70,15 +72,30 @@ const buttonFlight = document.querySelector("#find-flights")
 
 buttonFlight.addEventListener("click", event => {
     const formDataFlight = new FormData(formFlights)
-    const FLIGHTS_INFO = {
-        origin: formDataFlight.get('origin-flight'),
-        destination: formDataFlight.get('destination-flight'),
-        departureDate: formDataFlight.get('departure-date-flight'),
-        duration: formDataFlight.get('duration')
+    let checkOrigin = formDataFlight.get('origin-flight')
+    if (checkOrigin.match(YATAvalidation)) {
+        let checkDestination = formDataFlight.get('destination-flight')
+        if (checkDestination.match(YATAvalidation)) {
+            let checkDuration = formDataFlight.get('duration')
+            if (checkDuration.match(durationValidation)) {
+                const FLIGHTS_INFO = {
+                    origin: formDataFlight.get('origin-flight'),
+                    destination: formDataFlight.get('destination-flight'),
+                    departureDate: formDataFlight.get('departure-date-flight'),
+                    duration: formDataFlight.get('duration')
+                }
+                flightsHeaderContainer.innerHTML = ""
+                flightsContainer.innerHTML = ""
+                let flights = new Flights(FLIGHTS_INFO)
+                flights.loadFlights()
+            } else {
+                alert("Your trip duration should be between 1 and 15")
+            }
+        } else {
+            alert("Something is wrong, check your destination YATA code again.")
+        }
+    } else {
+        alert("Something is wrong, check your origin YATA code again.")
     }
-    flightsHeaderContainer.innerHTML = ""
-    flightsContainer.innerHTML = ""
-    let flights = new Flights(FLIGHTS_INFO)
-    flights.loadFlights()
     event.preventDefault()
 })
