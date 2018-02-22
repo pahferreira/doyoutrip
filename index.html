@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="css/paper.css">
     <!-- GENERAL CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css\jquery.mCustomScrollbar.css" />
     <!-- FA ICONS -->
     <script src="https://use.fontawesome.com/f5cc51da7b.js"></script>
+    <script src="js\jquery-3.3.1.min.js"></script>
+    <script src="js\jquery.transit.min.js"></script>
+    <script src="js\jquery.mCustomScrollbar.concat.min.js"></script>
+
 
     <title>LS PROJECT</title>
 </head>
@@ -108,4 +113,29 @@
     </section>
   </div>
 
+  <script type="text/javascript">
+    $.fx.speeds._default = 3500;
+    $('.fadein').transition({ opacity: 100, delay: 500, easing: 'easeOutQuint' });
+    $('.fadein2').transition({ opacity: 100, delay: 2000, easing: 'easeOutQuint'});
+
+    var h = window.innerHeight;
+
+    $(window).resize(function(){
+      h = window.innerHeight;
+    });
+
+    (function($){
+        $(window).on("load",function(){
+            $(".fullWebSite").mCustomScrollbar({
+              scrollButtons:{enable:true,scrollType:"stepped"},
+					    keyboard:{scrollType:"stepped"},
+					    mouseWheel:{scrollAmount: h ,normalizeDelta:true},
+					    theme:"rounded-dark",
+					    autoExpandScrollbar:true,
+
+            });
+        });
+    })(jQuery);
+
+  </script>
 </body>
