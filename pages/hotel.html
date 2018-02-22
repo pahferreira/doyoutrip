@@ -16,12 +16,32 @@
 <body>
     <main id="main">
         <form action="" id="FormHotelsID">
-            <label>Location: <input type="text" placeholder="Ex: NYC" name="location-hotel"></label>
-            <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here</a>.</p>
-            <label>Check In: <input type="date" placeholder="dd/mm/yyyy" name="checkin-hotel"></label>
-            <label>Check Out: <input type="date" placeholder="dd/mm/yyyy" name="checkout-hotel"></label><br>
-            <button class="btn-small" type="click" id="find-hotels">Find Hotels!</button>
-            <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
+            <div class="container">
+                <div class="row flex-center">
+                    <div class="col flex-center">
+                        <label>Location: <input type="text" placeholder="Ex: NYC" name="location-hotel"></label>
+                    </div>
+                </div>
+                <div class="row flex-center">
+                    <div class="flex-center input-boxes">
+                        <label>Check In: <input type="date" placeholder="dd/mm/yyyy" name="checkin-hotel"></label>
+                    </div>
+                    <div class="flex-center input-boxes">
+                        <label>Check Out: <input type="date" placeholder="dd/mm/yyyy" name="checkout-hotel"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col">
+                        <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code" target="_blank">here</a>.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col">
+                        <button class="btn-small" type="click" id="find-hotels">Find Hotels!</button>
+                        <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
+                    </div>
+                </div>
+            </div>
 
         </form>
         <table style="margin-top: 3%">

@@ -66,6 +66,7 @@ class Hotels {
     }
 }
 
+const YATAvalidation = /^([A-Z]){3}$/gi
 const hotelsHeaderContainer = document.querySelector("#thead-hotels")
 const hotelsContainer = document.querySelector("#tbody-hotels")
 const formHotels = document.querySelector("form#FormHotelsID")
@@ -73,14 +74,19 @@ const buttonHotel = document.querySelector("#find-hotels")
 
 buttonHotel.addEventListener("click", event => {
     const formDataHotel = new FormData(formHotels)
-    const HOTEL_INFO = {
-        location: formDataHotel.get('location-hotel'),
-        checkin: formDataHotel.get('checkin-hotel'),
-        checkout: formDataHotel.get('checkout-hotel')
+    let checkLocation = formDataHotel.get('location-hotel')
+    if (checkLocation.match(YATAvalidation)) {
+        const HOTEL_INFO = {
+            location: formDataHotel.get('location-hotel'),
+            checkin: formDataHotel.get('checkin-hotel'),
+            checkout: formDataHotel.get('checkout-hotel')
+        }
+        hotelsHeaderContainer.innerHTML = ""
+        hotelsContainer.innerHTML = ""
+        let hotels = new Hotels(HOTEL_INFO)
+        hotels.loadHotels()
+    } else {
+        alert("Something is wrong, check your location YATA code again.")
     }
-    hotelsHeaderContainer.innerHTML = ""
-    hotelsContainer.innerHTML = ""
-    let hotels = new Hotels(HOTEL_INFO)
-    hotels.loadHotels()
     event.preventDefault()
 })
