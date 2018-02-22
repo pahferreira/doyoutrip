@@ -1,4 +1,7 @@
-class Cars {
+export const carsHeaderContainer = document.querySelector("#thead-cars")
+export const carsContainer = document.querySelector("#tbody-cars")
+
+export class Cars {
     constructor(carsInfo) {
         this.carsInfo = carsInfo
         this.BASE_URL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?"
@@ -14,10 +17,10 @@ class Cars {
 
         fetch(FETCH_URL).then(response => response.json()).then(json => {
             if (json.results == undefined || json.results.length == 0) {
-                carsHeader.innerHTML = this.carsError()
+                carsHeaderContainer.innerHTML = this.carsError()
             } else {
                 let carsData = json.results
-                carsHeader.innerHTML = this.carsHeaderHTML()
+                carsHeaderContainer.innerHTML = this.carsHeaderHTML()
                 carsContainer.insertAdjacentHTML('beforeend', this.carsHTML(carsData))
             }
         })
@@ -29,7 +32,6 @@ class Cars {
 
     carsHTML(cars) {
         const carsData = cars.map(car => {
-            console.log(car.cars.length)
             return {
                 "company_name": car.provider.company_name,
                 "available_cars": car.cars.length,
@@ -69,29 +71,3 @@ class Cars {
         )
     }
 }
-
-const YATAvalidation = /^([A-Z]){3}$/gi
-const carsContainer = document.querySelector("#tbody-cars")
-const carsHeader = document.querySelector("#thead-cars")
-const formCars = document.querySelector("form#FormCarsID")
-let buttonCar = document.querySelector("#find-cars")
-
-buttonCar.addEventListener("click", event => {
-    const formDataCars = new FormData(formCars)
-    let checkLocation = formDataCars.get('location-car')
-    if (checkLocation.match(YATAvalidation)) {
-        const CARS_INFO = {
-            location: formDataCars.get('location-car'),
-            pickUp: formDataCars.get('pickup-car'),
-            dropOff: formDataCars.get('dropoff-car')
-        }
-
-        carsContainer.innerHTML = ""
-        carsHeader.innerHTML = ""
-        let cars = new Cars(CARS_INFO)
-        cars.loadCars()
-    } else {
-        alert("Something is wrong, check your location YATA code again.")
-    }
-    event.preventDefault()
-})
