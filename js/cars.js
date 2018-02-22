@@ -70,6 +70,7 @@ class Cars {
     }
 }
 
+const YATAvalidation = /^([A-Z]){3}$/gi
 const carsContainer = document.querySelector("#tbody-cars")
 const carsHeader = document.querySelector("#thead-cars")
 const formCars = document.querySelector("form#FormCarsID")
@@ -77,15 +78,20 @@ let buttonCar = document.querySelector("#find-cars")
 
 buttonCar.addEventListener("click", event => {
     const formDataCars = new FormData(formCars)
-    const CARS_INFO = {
-        location: formDataCars.get('location-car'),
-        pickUp: formDataCars.get('pickup-car'),
-        dropOff: formDataCars.get('dropoff-car')
-    }
+    let checkLocation = formDataCars.get('location-car')
+    if (checkLocation.match(YATAvalidation)) {
+        const CARS_INFO = {
+            location: formDataCars.get('location-car'),
+            pickUp: formDataCars.get('pickup-car'),
+            dropOff: formDataCars.get('dropoff-car')
+        }
 
-    carsContainer.innerHTML = ""
-    carsHeader.innerHTML = ""
-    let cars = new Cars(CARS_INFO)
-    cars.loadCars()
+        carsContainer.innerHTML = ""
+        carsHeader.innerHTML = ""
+        let cars = new Cars(CARS_INFO)
+        cars.loadCars()
+    } else {
+        alert("Something is wrong, check your location YATA code again.")
+    }
     event.preventDefault()
 })

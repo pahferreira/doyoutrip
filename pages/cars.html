@@ -14,26 +14,40 @@
 </head>
 <main id="main">
     <form action="" id="FormCarsID">
-        <label>Location: <input type="text" placeholder="Ex: NYC" name="location-car"></label>
-        <label>Pick Up: <input type="date" placeholder="dd/mm/yyyy" name="pickup-car"></label>
-        <label>Drop Off: <input type="date" placeholder="dd/mm/yyyy" name="dropoff-car"></label><br>
-        <button class="btn-small" type="click" id="find-cars">My own Batmobile!</button>
-        <a href="../index.html"><button class="btn-small" type="button" name="button">Back Home!</button></a>
-
+        <div class="container">
+            <div class="row flex-center">
+                <div class="flex-center"><label>Location: <input type="text " placeholder="Ex: NYC " name="location-car "></label></div>
+            </div>
+            <div class="row flex-center">
+                <div class="flex-center input-boxes "><label>Pick Up: <input type="date " placeholder="dd/mm/yyyy " name="pickup-car "></label></div>
+                <div class="flex-center input-boxes "><label>Drop Off: <input type="date " placeholder="dd/mm/yyyy " name="dropoff-car "></label><br></div>
+            </div>
+            <div class="row ">
+                <div class="col-12 col">
+                    <p>Check the IATA airport code <a href="https://en.wikipedia.org/wiki/IATA_airport_code " target="_blank ">here.</a></p>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12 col">
+                    <button class="btn-small " type="click " id="find-cars ">My own Batmobile!</button>
+                    <a href="../index.html "><button class="btn-small " type="button " name="button ">Back Home!</button></a>
+                </div>
+            </div>
+        </div>
     </form>
     <table>
-        <thead id="thead-cars">
+        <thead id="thead-cars ">
         </thead>
-        <tbody id="tbody-cars">
+        <tbody id="tbody-cars ">
         </tbody>
     </table>
-    <img src="../img/hotels-img.jpg" alt="">
+    <img src="../img/hotels-img.jpg " alt=" ">
 </main>
 
 <body>
 
 
-    <script src="../js/cars.js"></script>
+    <script src="../js/cars.js "></script>
 </body>
 
 </html>
