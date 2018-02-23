@@ -209,7 +209,6 @@ class Cars {
 
     carsHTML(cars) {
         const carsData = cars.map(car => {
-            console.log(car.cars.length)
             return {
                 "company_name": car.provider.company_name,
                 "available_cars": car.cars.length,
