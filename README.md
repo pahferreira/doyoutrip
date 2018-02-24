@@ -13,4 +13,4 @@ API: https://sandbox.amadeus.com/
 * Pablo Dias (https://github.com/pablo-dias)
 
 ## Imagem do Projeto
-![Alt Text](https://imgur.com/a/04Fqd)
+(https://imgur.com/a/04Fqd)
